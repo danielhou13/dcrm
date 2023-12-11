@@ -89,8 +89,9 @@ def delete_record(request, pk):
 
 
 def add_record(request):
-    form = AddRecordForm(request.POST or None)
+    form = AddRecordForm(request.POST or None, request.FILES or None)
     if request.user.is_authenticated:
+        print(request.method, form.is_valid())
         if request.method == "POST":
             if form.is_valid():
                 form.save()
@@ -105,7 +106,10 @@ def add_record(request):
 def update_record(request, pk):
     if request.user.is_authenticated:
         current_record = Record.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=current_record)
+        form = AddRecordForm(
+            request.POST or None, request.FILES or None, instance=current_record
+        )
+        print(request.method, form.is_valid())
         if form.is_valid():
             form.save()
             messages.success(request, "Record has been Updated")

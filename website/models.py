@@ -12,6 +12,7 @@ class Record(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     postal_code = models.CharField(max_length=10)
+    pic = models.ImageField(default="default.jpg", upload_to="record_pics")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

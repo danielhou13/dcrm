@@ -4,8 +4,9 @@
 <div class="card">
   <div class="card-header"> {{customer_record}} </div>
   <div class="card-body">
-    <p class="card-text"
-      ><strong>Email: </strong>{{customer_record.email}}<br />
+    <p class="card-text">
+      <td><img class="img-thumbnail" src="{{customer_record.pic.url}}"> </td><br />
+      <strong>Email: </strong>{{customer_record.email}}<br />
       <strong>Phone: </strong>{{customer_record.phone}} <br />
       <strong>Address: </strong>{{customer_record.address}}<br />
       <strong>City: </strong>{{customer_record.city}}<br />
