@@ -20,9 +20,8 @@ def home(request):
         else:
             messages.error(request, "There was an error logging in. Please try again")
             return redirect("home")
-    else:
-        records = Record.objects.all()
-        return render(request, "home.html", {"records": records})
+    records = Record.objects.all()
+    return render(request, "home.html", {"records": records})
 
 
 # def login_user(request):
@@ -60,10 +59,8 @@ def register_user(request):
             login(request, user)
             messages.success(request, "You Have Successfully Registered! Welcome!")
             return redirect("home")
-    else:
-        form = SignUpForm()
         return render(request, "register.html", {"form": form})
-
+    form = SignUpForm()
     return render(request, "register.html", {"form": form})
 
 
@@ -72,9 +69,8 @@ def customer_record(request, pk):
         # Lookup record
         customer_record = Record.objects.get(id=pk)
         return render(request, "record.html", {"customer_record": customer_record})
-    else:
-        messages.success(request, "You must be logged in to view that page")
-        return redirect("home")
+    messages.success(request, "You must be logged in to view that page")
+    return redirect("home")
 
 
 def delete_record(request, pk):
@@ -83,9 +79,8 @@ def delete_record(request, pk):
         delete_it.delete()
         messages.success(request, "You have succesfully deleted the record")
         return redirect("home")
-    else:
-        messages.success(request, "You must be logged in to view that page")
-        return redirect("home")
+    messages.success(request, "You must be logged in to view that page")
+    return redirect("home")
 
 
 def add_record(request):
@@ -98,9 +93,8 @@ def add_record(request):
                 messages.success(request, "Record Added...")
                 return redirect("home")
         return render(request, "add_record.html", {"form": form})
-    else:
-        messages.success(request, "You Must Be Logged In...")
-        return redirect("home")
+    messages.success(request, "You Must Be Logged In...")
+    return redirect("home")
 
 
 def update_record(request, pk):
@@ -115,6 +109,5 @@ def update_record(request, pk):
             messages.success(request, "Record has been Updated")
             return redirect("home")
         return render(request, "update_record.html", {"form": form})
-    else:
-        messages.success(request, "You Must Be Logged In...")
-        return redirect("home")
+    messages.success(request, "You Must Be Logged In...")
+    return redirect("home")
