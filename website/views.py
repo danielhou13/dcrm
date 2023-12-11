@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Record
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -20,8 +21,15 @@ def home(request):
         else:
             messages.error(request, "There was an error logging in. Please try again")
             return redirect("home")
-    records = Record.objects.all()
-    return render(request, "home.html", {"records": records})
+
+    p = Paginator(Record.objects.all(), 2)
+    page = request.GET.get("page")
+    records_paginated = p.get_page(page)
+    return render(
+        request,
+        "home.html",
+        {"records_paginated": records_paginated},
+    )
 
 
 # def login_user(request):
