@@ -1,0 +1,4 @@
+django
+pillow
+my-sql
+my-sql-connector-python
